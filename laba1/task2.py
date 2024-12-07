@@ -1,4 +1,4 @@
-from task1 import Car, Book, BankAccount  # TODO: импортируйте классы, созданные в ходе выполнения прошлого задания
+from task import Car, Book, BankAccount  # TODO: импортируйте классы, созданные в ходе выполнения прошлого задания
 
 if __name__ == "__main__":
     book = Book("Under the Dome", "Stephen King", 1024, "фантастика")
@@ -16,6 +16,6 @@ if __name__ == "__main__":
         print('Ошибка: неправильные данные')
 
     try:
-        BA.payment(10000)
+            BA.payment(10000)
     except ValueError:
         print('Ошибка: неправильные данные')
