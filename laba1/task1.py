@@ -1,40 +1,51 @@
 # TODO: Подробно описать три произвольных класса
-import doctest
-
 
 # TODO: описать класс
 
 class Book:
-
     def __init__(self, title: str, author: str, pages: int, genre: str):
+
         if not isinstance(pages, int):
             raise TypeError("Количество страниц должно быть типа int")
         if pages <= 0:
             raise ValueError("Количество страниц должно быть больше нуля.")
         allowed_genres = ["роман", "детектив", "фантастика", "триллер"]
         if genre not in allowed_genres:
-            raise ValueError(f"Жанр '{genre}' недопустим. Допустимые жанры: {', '.join(allowed_genres)}.")
+            raise ValueError(
+                f"Жанр '{genre}' недопустим. Допустимые жанры: {', '.join(allowed_genres)}."
+            )
 
         self.title = title
         self.author = author
         self.pages = pages
         self.genre = genre
 
-    def get_info(self) -> str:
-        """Возвращает информацию о книге в формате 'Название книги' автор: Автор."""
-        return f"{self.title} автор: {self.author}"
+    def get_info(self) -> None:
+        """
+          Класс для представления книги.
+
+          >>> book = Book('Война и мир', 'Лев Толстой', 1225, 'роман')
+          >>> book.get_info()
+          Война и мир автор: Лев Толстой
+        """
+        print(f"{self.title} автор: {self.author}")
 
     def remaining_pages(self, pages_to_read: int = 0) -> int:
-        """Возвращает количество непрочитанных страниц """
+        """
+        >>> book = Book('Война и мир', 'Лев Толстой', 1225, 'роман')
+        >>> book.remaining_pages(500)
+        725
+        """
         if pages_to_read > self.pages:
             raise ValueError("Вы пытаетесь прочитать больше страниц, чем есть в книге.")
         self.pages -= pages_to_read
         return self.pages
+
+
 # TODO: описать ещё класс
 
 
 class Car:
-
     def __init__(self, brand: str, model: str, year: int, color: str):
 
         if year <= 0 or year > 2025:
@@ -48,7 +59,11 @@ class Car:
         self.is_running = False
 
     def start_engine(self) -> None:
-
+        """
+        >>> car = Car('Toyota', 'Corolla', 2010, 'white')
+        >>> car.start_engine()
+        Двигатель запущен.
+        """
         if not self.is_running:
             self.is_running = True
             print("Двигатель запущен.")
@@ -56,7 +71,15 @@ class Car:
             print("Двигатель уже запущен.")
 
     def stop_engine(self) -> None:
+        """
+        Класс для представления автомобиля.
 
+        >>> car = Car('Toyota', 'Corolla', 2010, 'white')
+        >>> car.start_engine()
+        Двигатель запущен.
+        >>> car.stop_engine()
+        Двигатель остановлен.
+        """
         if self.is_running:
             self.is_running = False
             print("Двигатель остановлен.")
@@ -64,7 +87,13 @@ class Car:
             print("Двигатель уже остановлен.")
 
     def speed_change(self, delta_speed: int) -> int:
-        """Возвращает новую скорость"""
+        """
+        Класс для представления автомобиля.
+
+        >>> car = Car('Toyota', 'Corolla', 2010, 'white')
+        >>> car.speed_change(50)
+        50
+        """
         if not isinstance(delta_speed, int):
             raise TypeError("Ускорение должно быть типа int")
 
@@ -74,12 +103,11 @@ class Car:
             print("Достигли максимальной скорости.")
         if new_speed <= 0:
             self.speed = 0
-            print("Вы оставновились.")
+            print("Вы остановились.")
         else:
             self.speed = new_speed
-            print(new_speed)
+            return self.speed
 
-        return self.speed
 
 # TODO: и ещё один
 
@@ -121,4 +149,5 @@ class BankAccount:
 
 
 if __name__ == "__main__":
-    doctest.testmod()
+    import doctest
+    doctest.testmod()  # тестирование примеров, которые находятся в документации
